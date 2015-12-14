@@ -52,11 +52,13 @@
       x.domain(d3.extent(data, function(d) { return d.reading_date; }));
       y.domain(d3.extent(data, function(d) { return d.reading; }));
 
+      console.log("I'm here");
       svg.append("g")
           .attr("class", "x axis")
           .attr("transform", "translate(0," + height + ")")
           .call(xAxis);
-      console.log('here');
+      console.log(height)
+      console.log('And here');
 
       svg.append("g")
           .attr("class", "y axis")
