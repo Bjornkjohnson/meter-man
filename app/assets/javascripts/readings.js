@@ -16,17 +16,21 @@
 
     var x = d3.time.scale()
         .range([0, width]);
-    console.log(x);
 
     var y = d3.scale.linear()
         .range([height, 0]);
+
+    var svg = d3.select("#line-plot")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     var xAxis = d3.svg.axis()
         .ticks(d3.time.months, 1)
         .tickFormat(d3.time.format("%b"))
         .scale(x)
         .orient("bottom");
-    console.log(xAxis);
 
     var yAxis = d3.svg.axis()
         .scale(y)
@@ -36,11 +40,6 @@
         .x(function(d) { return x(d.reading_date); })
         .y(function(d) { return y(d.reading); });
 
-    var svg = d3.select("#line-plot")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-      .append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     d3.json("readings/data.json", function(error, data) {
       if (error) throw error;
@@ -61,7 +60,7 @@
       svg.append("g")
           .attr("class", "y axis")
           .call(yAxis)
-        .append("text")
+          .append("text")
           .attr("transform", "rotate(-90)")
           .attr("y", 6)
           .attr("dy", ".71em")
