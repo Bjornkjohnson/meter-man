@@ -16,6 +16,7 @@
 
     var x = d3.time.scale()
         .range([0, width]);
+    console.log(x);
 
     var y = d3.scale.linear()
         .range([height, 0]);
@@ -25,6 +26,7 @@
         .tickFormat(d3.time.format("%b"))
         .scale(x)
         .orient("bottom");
+    console.log(xAxis);
 
     var yAxis = d3.svg.axis()
         .scale(y)
